@@ -168,14 +168,11 @@ SELECT
     voos.id AS voo_id,
     voos.numero_voo,
     voos.destino,
-    COUNT(passagens.id) AS quantidade_passageiros,
-    COALESCE(SUM(passagens.valor), 0) AS receita_total
-FROM voos 
-JOIN passagens 
+    SUM(passagens.valor) AS receita_total
+FROM voos
+JOIN passagens
     ON voos.id = passagens.voo_id
 GROUP BY
     voos.id,
     voos.numero_voo,
     voos.destino;
-
-
